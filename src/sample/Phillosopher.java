@@ -2,8 +2,8 @@ package sample;
 
 public class Phillosopher implements Runnable {
 
-    private Object left_fork;
-    private Object right_fork;
+    private final Object left_fork;
+    private final Object right_fork;
 
     Phillosopher(Object left,Object right){
         this.left_fork = left;
@@ -18,6 +18,30 @@ public class Phillosopher implements Runnable {
 
     @Override
     public void run() {
+        try {
+            while (true) {
+
+                // mysli
+                doAction(System.nanoTime() + ": Thinking");
+
+                synchronized (left_fork) {
+
+                    doAction(System.nanoTime()+ ": Picked up left fork");
+
+                    synchronized (right_fork) {
+                        // zaczyna jesc
+                        doAction(System.nanoTime() + ": Picked up right fork - eating");
+
+                        doAction(System.nanoTime()+ ": Put down right fork");
+                    }
+
+                    // konczy jesc i mysli
+                    doAction(System.nanoTime()+ ": Put down left fork. Back to thinking");
+                }
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
     }
 }
