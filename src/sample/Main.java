@@ -18,6 +18,14 @@ public class Main  {
 
             philosophers[i] = new Phillosopher(leftFork, rightFork);
 
+            if (i == philosophers.length - 1) {
+
+                // The last philosopher picks up the right fork first
+                philosophers[i] = new Phillosopher(rightFork, leftFork);
+            } else {
+                philosophers[i] = new Phillosopher(leftFork, rightFork);
+            }
+
             Thread t = new Thread(philosophers[i], "Philosopher " + (i + 1));
             t.start();
         }
