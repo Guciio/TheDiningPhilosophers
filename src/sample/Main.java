@@ -13,14 +13,14 @@ public class Main  {
         }
 
         for (int i = 0; i < philosophers.length; i++) {
+
             Object leftFork = forks[i];
             Object rightFork = forks[(i + 1) % forks.length];
 
             philosophers[i] = new Phillosopher(leftFork, rightFork);
 
             if (i == philosophers.length - 1) {
-
-                // The last philosopher picks up the right fork first
+                // Ostatni bierze prawego pierwszego
                 philosophers[i] = new Phillosopher(rightFork, leftFork);
             } else {
                 philosophers[i] = new Phillosopher(leftFork, rightFork);

@@ -11,9 +11,8 @@ public class Phillosopher implements Runnable {
     }
 
     private void doAction(String action) throws InterruptedException {
-        System.out.println(
-                Thread.currentThread().getName() + " " + action);
-        Thread.sleep(((int) (Math.random() * 100)));
+        System.out.println(Thread.currentThread().getName() + " " + action);
+        Thread.sleep(((int) (Math.random() * 10000)));
     }
 
     @Override
@@ -22,21 +21,21 @@ public class Phillosopher implements Runnable {
             while (true) {
 
                 // mysli
-                doAction(System.nanoTime() + ": Thinking");
+                doAction(" Thinking");
 
                 synchronized (left_fork) {
 
-                    doAction(System.nanoTime()+ ": Picked up left fork");
+                    doAction(" Picked up left fork");
 
                     synchronized (right_fork) {
                         // zaczyna jesc
-                        doAction(System.nanoTime() + ": Picked up right fork - eating");
+                        doAction(" Picked up right fork - eating");
 
-                        doAction(System.nanoTime()+ ": Put down right fork");
+                        doAction(" Put down right fork");
                     }
 
                     // konczy jesc i mysli
-                    doAction(System.nanoTime()+ ": Put down left fork. Back to thinking");
+                    doAction(" Put down left fork. Back to thinking");
                 }
             }
         } catch (InterruptedException e) {
